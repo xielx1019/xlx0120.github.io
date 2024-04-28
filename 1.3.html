@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width , initial-scale=1">
+  <!-- 
+   增加上面这句，可以看到浏览器的DevTools面板的模拟移动设备状态的变化
+  -->
+  <style>
+    *{
+      margin: 10px;
+      text-align: center;
+    }
+    header{
+      border: 2px solid rgb(195, 27, 229);
+      height: 15%;
+      font-size: 1.4em;
+    }
+    main{
+      border: 2px solid rgb(241, 92, 204);
+      height: 70%;
+      font-size: 0.6em;
+      background-image: url(./CSS.jpg);
+      background-size: cover;
+    }
+    nav{
+      border: 2px solid rgb(246, 118, 203);
+      height: 10%;
+      font-size: 1.2em;
+    }
+    footer{
+      border: 2px solid rgb(245, 131, 220);
+      height: 5%;
+    }
+    body{
+        position: relative;
+    }
+    #aid{
+        position: absolute;
+        border: 3px solid blue;
+        top: 0px;
+        left: 600px;
+    }
+    #bookface{
+        width: 80%;
+        height: 80%;
+        border: 2px solid yellowgreen;
+        background-color: aquamarine;
+        margin: auto;
+    }
+  </style>
+  <!--<link rel="stylesheet" href="myCSS.css" > 
+  <script src="myInit.js"> </script>-->
+  <title> "读好书、练思维、勤编程" </title>
+ </head> 
+ <body>
+  <header>
+	  <p id="book">
+      开源软件开发环境
+    </p> 
+  </header>
+  <nav>
+    <button>pre1</button>
+    <button>pre2</button>
+    <button>pre3</button>
+    <!--<p id ="chapter">
+     导航章节
+	  </p>-->
+  </nav>
+  <main id = 'main'>
+    <div  id = "bookface">
+      通过参考文献系统的阐述了现代开源软件的历史和现状，从软件开发的角度，总结了现代开源软件的开发环境，创造性的搭建了适合个人习惯的开发环境。其中，主要用Linux命令行搭建软件操作系统环境，实现代码的版本控制，实现了代码编译器和系统操作命令行完美高效的运行，并通过修改操作系统的配置实现代码编译器，通过Git克隆获取GitHub的开源代码，实现在本地建立了个人的代码仓库以及对代码的快速修改和运行。
+    </div>
+    
+  </main> 
+
+  <footer> 
+   <p id="statusInfo">
+     xielx 江西科技师范大学 2021--2025
+	 </p>
+  </footer> 
+  <div id="aid">
+   <p>用户键盘响应区</p>
+  </div>
+
+ <script>
+    var UI = {};
+    if(window.innerWidth>600){
+        UI.appWidth = 600;
+    }else{
+        UI.appWidth = window.innerWidth;
+    }
+    UI.appHeigth = window.innerHeight;
+    let baseFont = parseInt(UI.appWidth/20);
+    //字体大小、颜色可继承
+    document.body.style.fontSize = baseFont + "px";
+    //body高度设置为屏幕高度
+    document.body.style.width = UI.appWidth + "px";
+    document.body.style.height = UI.appHeigth + "px";
+    if(window.innerWidth<1000){
+        $("aid").style.display="none";
+    }
+    $("aid").style.width = window.innerWidth-UI.appWidth-30 + "px";
+    $("aid").style.height = UI.appHeigth-62+ "px";
+    
+
+    //尝试对鼠标设计ui控制
+    var mouse = {};
+    mouse.isDown=false;
+    mouse.x=0;
+    mouse.deltaX=0;
+    $("bookface").addEventListener("mousedown",function(ev)
+{
+    let x=ev.pageX;
+    let y=ev.pageY;
+    console.log("shubiao"+"("+x+","+y+")");
+});
+$("bookface").addEventListener("mousemove",function(ev)
+{
+    let x=ev.pageX;
+    let y=ev.pageY;
+    console.log("鼠标正在移动："+"("+x+","+y+")");
+    $("bookface").textContent="鼠标正在移动："+"("+x+","+y+")";
+});
+
+    function $(ele){
+        if (typeof ele !== 'string'){
+           throw("自定义的$函数参数的数据类型错误，实参必须是字符串！");
+           return 
+        } 
+        let dom = document.getElementById(ele) ;
+          if(dom){
+            return dom ;
+          }else{
+            dom = document.querySelector(ele) ;
+            if (dom) {
+                return dom ;
+            }else{
+                throw("执行$函数未能在页面上获取任何元素，请自查问题！");
+                return ;
+            }
+          }
+       } //end of $
+ </script>
+ </body>
+</html>
